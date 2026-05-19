@@ -2,6 +2,18 @@
   "skill_package": "wps-gongwen-skills",
   "evals": [
     {
+      "id": "office-suite-router",
+      "skill": "wps-office-native-router",
+      "prompt": "把这个 Word、PDF、Excel 的 WPS 原生处理流程串起来，字体、公式、导出 PDF 都要检查。",
+      "expected_output": "The assistant routes DOCX, spreadsheet, OfficeMCP/native formatting, and PDF verification in dependency order, then reports the verification layer and office suite status.",
+      "expectations": [
+        "Selects specialized routes",
+        "Orders source editing before native formatting and PDF verification",
+        "Names the native verification layer",
+        "Reports office suite status"
+      ]
+    },
+    {
       "id": "wps-font-drift",
       "skill": "wps-gongwen-mode",
       "prompt": "这份思想汇报用 python-docx 生成后，在 WPS 里仿宋和页码都不对，帮我按公文格式处理并导出 PDF。",
@@ -35,6 +47,42 @@
         "Keeps repository public-safe",
         "Offers synthetic/redacted examples",
         "Preserves reusable skill instructions"
+      ]
+    },
+    {
+      "id": "docx-template-wps-layout",
+      "skill": "wps-doc-native-workflow",
+      "prompt": "帮我把这个 Word 模板填好，别破坏页眉页脚和表格，最后要在 WPS 里看起来正常。",
+      "expected_output": "The assistant chooses a DOCX route, works on a safe copy, inspects document structure before editing, preserves headers/footers/tables, and requires rendered WPS or fallback verification.",
+      "expectations": [
+        "Chooses CREATE/EDIT/FILL/FORMAT/VERIFY route",
+        "Preserves structure before formatting",
+        "Uses rendered layout as completion gate",
+        "Reports DOCX status"
+      ]
+    },
+    {
+      "id": "pdf-export-final-check",
+      "skill": "wps-pdf-render-qa",
+      "prompt": "这份 WPS 导出的 PDF 帮我检查一下页码、字体和表格有没有错位，临时截图不要留下。",
+      "expected_output": "The assistant treats the PDF as rendered evidence, checks pages/fonts/tables, cleans temporary screenshots after inspection, and reports PDF status with findings.",
+      "expectations": [
+        "Inspects PDF rendered output",
+        "Checks page numbers, fonts, tables, clipping",
+        "Cleans temporary visual artifacts",
+        "Reports PDF status"
+      ]
+    },
+    {
+      "id": "xlsx-recalc-wps-export",
+      "skill": "wps-excel-native-workflow",
+      "prompt": "把这个 Excel 表格补公式，保持模板格式，然后用 WPS 表格导出 PDF，确认没有 #REF! 这类错误。",
+      "expected_output": "The assistant preserves the template, writes formulas for dynamic calculations, recalculates, scans formula errors, uses WPS/Excel native export when needed, and reports spreadsheet status.",
+      "expectations": [
+        "Preserves workbook template conventions",
+        "Uses formulas instead of hardcoded dynamic results",
+        "Recalculates and scans formula errors",
+        "Reports spreadsheet status"
       ]
     }
   ]

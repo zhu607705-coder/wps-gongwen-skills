@@ -12,9 +12,10 @@ OfficeMCP is an MCP server for controlling Microsoft Office applications. Its re
 
 For rendering-sensitive documents, the reliable authority is the application result:
 
-- whether WPS opens the file;
+- whether WPS or Excel opens the file;
 - whether fonts are available and applied;
 - whether page setup survives reopening;
+- whether spreadsheet formulas recalculate in the target app;
 - whether the exported PDF matches the intended layout.
 
 OfficeMCP can turn those checks into agent-operable steps when the target environment supports it.
@@ -23,7 +24,7 @@ OfficeMCP can turn those checks into agent-operable steps when the target enviro
 
 Use OfficeMCP for:
 
-- opening an existing `.docx`;
+- opening an existing `.docx` or `.xlsx`;
 - applying formatting through the real app;
 - saving a working copy;
 - exporting PDF;

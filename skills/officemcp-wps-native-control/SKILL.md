@@ -1,6 +1,6 @@
 ---
 name: officemcp-wps-native-control
-description: "Use when a user wants Codex/Claude to control Word or WPS through OfficeMCP for native document formatting, WPS.word automation, official-document layout, PDF export, or font/rendering verification."
+description: "Use when a user wants Codex/Claude to control Word, WPS Writer, Excel, or WPS Spreadsheets through OfficeMCP for native formatting, WPS.word/wps.excel automation, PDF export, formulas, or font/rendering verification."
 type: skill
 version: "1.0"
 category: documents
@@ -8,13 +8,14 @@ category: documents
 
 # OfficeMCP WPS Native Control
 
-Use this skill when the user wants agentic control over Word/WPS as the document rendering environment, especially for WPS font issues, official-document layout drift, PDF export, or repeatable document QA.
+Use this skill when the user wants agentic control over Word/WPS/Excel as the rendering environment, especially for WPS font issues, official-document layout drift, spreadsheet recalculation, PDF export, or repeatable Office QA.
 
 ## Trigger Phrases
 
 - “OfficeMCP”
 - “MCP 控制 WPS”
 - “WPS.word”
+- “wps.excel / WPS 表格”
 - “让 Codex 直接操作 WPS”
 - “WPS 原生验证”
 - “打开 Word/WPS 后导出 PDF”
@@ -34,8 +35,8 @@ Read `../../references/officemcp-wps-native-control.md` before installing, confi
 Confirm these before claiming native automation:
 
 - OfficeMCP is installed or the user has asked you to set it up.
-- Word or WPS Writer exists on the target machine.
-- The target app name is known, such as `WPS.word`, `wps.excel`, or Word.
+- Word, WPS Writer, Excel, or WPS Spreadsheets exists on the target machine.
+- The target app name is known, such as `WPS.word`, `wps.excel`, `wps.powerpoint`, Word, or Excel.
 - The target document path is local and safe to open.
 - Public publication will exclude private documents and absolute local paths.
 
@@ -48,7 +49,7 @@ If one precondition is missing, state the blocker and continue with the best ver
 Classify the request:
 
 - Create: generate content and open it in WPS/Word.
-- Format: apply page setup, fonts, styles, headings, page numbers, and official-document sections.
+- Format: apply page setup, fonts, styles, headings, page numbers, official-document sections, workbook print areas, or spreadsheet formatting.
 - Inspect: read back styles, font names, page setup, and visible layout.
 - Export: save `.docx`, export PDF, or create comparison evidence.
 - Repair: fix font fallback or layout drift observed in WPS.
@@ -62,8 +63,9 @@ When editing an existing document, make a working copy unless the user explicitl
 Prefer OfficeMCP or app-level APIs for:
 
 - opening the document in the real application;
-- applying fonts and paragraph styles;
+- applying fonts, paragraph styles, and workbook styles;
 - setting page margins and page numbering;
+- recalculating formulas in the target spreadsheet app;
 - exporting to PDF from the application;
 - inspecting the final visible document state.
 
@@ -94,7 +96,7 @@ Return a concise status:
 
 ```markdown
 Native control status: PASS / PARTIAL / BLOCKED
-App used: WPS.word / Word / file-level fallback
+App used: WPS.word / wps.excel / Word / Excel / file-level fallback
 Operations completed: ...
 Verification evidence: ...
 Font/layout findings: ...
@@ -111,4 +113,4 @@ Next action: ...
 
 ## Best Pairing
 
-Use `wps-gongwen-mode` first when the main task is official-document formatting. Use this skill when the task needs repeatable native automation through OfficeMCP.
+Use `wps-gongwen-mode` first when the main task is official-document formatting. Use `wps-excel-native-workflow` first when the main task is formulas or spreadsheet structure. Use this skill when the task needs repeatable native automation through OfficeMCP.
